@@ -9,6 +9,9 @@
     <PackageReference Include="StackExchange.Redis" Version="2.0.601" />
     <PackageReference Include="Npgsql" Version="4.0.9" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" /> 
   </ItemGroup>
 
 </Project>

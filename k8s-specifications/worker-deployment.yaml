@@ -4,7 +4,7 @@ metadata:
   labels:
     app: worker
   name: worker
-  namespace: vote
+  namespace: default
 spec:
   replicas: 1
   selector:
@@ -16,5 +16,12 @@ spec:
         app: worker
     spec:
       containers:
-      - image: dockersamples/examplevotingapp_worker
+      - image: demo-registry.ap-southeast-5.cr.aliyuncs.com/demo/worker:cm
         name: worker
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config
+      volumes:
+      - name: config-volume
+        configMap:
+          name: demo-config

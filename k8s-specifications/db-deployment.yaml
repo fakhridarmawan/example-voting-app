@@ -1,10 +1,52 @@
+# create pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pv-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: alicloud-disk-essd
+
+# configmap
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-cm
+  labels:
+    app: db
+data:
+  POSTGRES_DB: postgres
+  #POSTGRES_PASSWORD: postgresql
+  #POSTGRES_USER: postgresql
+
+#secret
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-secret
+  labels:
+    app: db
+data:
+  POSTGRES_USER: cG9zdGdyZXNxbA==
+  POSTGRES_PASSWORD: cG9zdGdyZXNxbA==
+
+# db
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: db
   labels:
     app: db
-  name: db
-  namespace: vote
 spec:
   replicas: 1
   selector:
@@ -16,19 +58,23 @@ spec:
         app: db
     spec:
       containers:
-      - image: postgres:9.4
-        name: postgres
+      - name: db
+        image: postgres:9.4.26
         env:
-        - name: POSTGRES_USER
-          value: postgres
-        - name: POSTGRES_PASSWORD
-          value: postgres
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
+        envFrom:
+          - secretRef:
+              name: postgres-secret
+          - configMapRef:
+              name: postgres-cm
         ports:
         - containerPort: 5432
-          name: postgres
+          name: db
         volumeMounts:
-        - mountPath: /var/lib/postgresql/data
-          name: db-data
+        - name: db-data
+          mountPath: /var/lib/postgresql/data
       volumes:
       - name: db-data
-        emptyDir: {} 
+        persistentVolumeClaim:
+          claimName: postgres-pv-claim

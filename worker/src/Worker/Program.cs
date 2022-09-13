@@ -7,6 +7,7 @@ using System.Threading;
 using Newtonsoft.Json;
 using Npgsql;
 using StackExchange.Redis;
+using Microsoft.Extensions.Configuration;
 
 namespace Worker
 {
@@ -16,7 +17,11 @@ namespace Worker
         {
             try
             {
-                var pgsql = OpenDbConnection("Server=db;Username=postgres;Password=postgres;");
+                var MyConfig = new ConfigurationBuilder().AddJsonFile("config/appsettings.json").Build();
+                var connstring = MyConfig.GetValue<string>("ConnectionStrings:DefaultConnection");
+                //var AppName = MyConfig.GetValue<string>("AppSettings:APP_Name");
+                //var pgsql = OpenDbConnection("Host=db;Username=postgresql;Password=postgresql;Database=postgres;");
+                var pgsql = OpenDbConnection(connstring);
                 var redisConn = OpenRedisConnection("redis");
                 var redis = redisConn.GetDatabase();
 
@@ -46,7 +51,7 @@ namespace Worker
                         if (!pgsql.State.Equals(System.Data.ConnectionState.Open))
                         {
                             Console.WriteLine("Reconnecting DB");
-                            pgsql = OpenDbConnection("Server=db;Username=postgres;Password=postgres;");
+                            pgsql = OpenDbConnection(connstring);
                         }
                         else
                         { // Normal +1 vote requested
@@ -80,12 +85,12 @@ namespace Worker
                 }
                 catch (SocketException)
                 {
-                    Console.Error.WriteLine("Waiting for db");
+                    Console.Error.WriteLine("Waiting for dbsocket"+connectionString);
                     Thread.Sleep(1000);
                 }
                 catch (DbException)
                 {
-                    Console.Error.WriteLine("Waiting for db");
+                    Console.Error.WriteLine("Waiting for dbexception"+connectionString);
                     Thread.Sleep(1000);
                 }
             }

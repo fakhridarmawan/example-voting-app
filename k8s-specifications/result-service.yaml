@@ -4,9 +4,9 @@ metadata:
   labels:
     app: result
   name: result
-  namespace: vote
+  namespace: default
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
   - name: "result-service"
     port: 5001

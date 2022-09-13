@@ -4,7 +4,7 @@ metadata:
   labels:
     app: result
   name: result
-  namespace: vote
+  namespace: default
 spec:
   replicas: 1
   selector:
@@ -16,8 +16,13 @@ spec:
         app: result
     spec:
       containers:
-      - image: dockersamples/examplevotingapp_result:before
+      - image: demo-registry.ap-southeast-5.cr.aliyuncs.com/demo/result:3
         name: result
         ports:
         - containerPort: 80
           name: result
+        envFrom:
+          - secretRef:
+              name: postgres-secret
+          - configMapRef:
+              name: postgres-cm
