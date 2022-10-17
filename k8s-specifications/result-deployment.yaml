@@ -16,7 +16,7 @@ spec:
         app: result
     spec:
       containers:
-      - image: demo-registry.ap-southeast-5.cr.aliyuncs.com/demo/result:3
+      - image: fakhridarmawan/result:latest
         name: result
         ports:
         - containerPort: 80
