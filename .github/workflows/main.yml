@@ -16,7 +16,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file vote/Dockerfile --tag ${{ env.REPO_TAG }}
+      working-directory: ./vote
+      run: docker build . --file Dockerfile --tag ${{ env.REPO_TAG }}
     - name: Scan image by sas-image-scanner
       run: >
           docker run --rm -v /var/run/docker.sock:/var/run/docker.sock --network=host
