@@ -23,4 +23,4 @@ jobs:
           docker run --rm -v /var/run/docker.sock:/var/run/docker.sock --network=host
           sas-image-scanner-registry.cn-hangzhou.cr.aliyuncs.com/sas_public/sas-image-scanner:latest
           --accessKeyId=${{ secrets.ACCESSKEYID }} --accessKeySecret=${{ secrets.ACCESSKEYSECRET }}
-          --token=${{ secrets.SAS_TOKEN }} --imageId=${{ env.REPO_TAG }}
+          --token=${{ secrets.SAS_TOKEN }} --imageId=${{ env.REPO_TAG }} --domain=https://tds.ap-southeast-1.aliyuncs.com
