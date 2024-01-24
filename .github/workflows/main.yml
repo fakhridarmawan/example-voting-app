@@ -2,7 +2,7 @@ name: Docker build and scan security issue by sas-image-scanner
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 env:
   REPO_TAG: voting:latest
