@@ -16,7 +16,7 @@ spec:
         app: worker
     spec:
       containers:
-      - image: fakhridarmawan/worker:latest
+      - image: demo-registry-vpc.ap-southeast-5.cr.aliyuncs.com/demovotingapp/worker:0.2
         name: worker
         volumeMounts:
         - name: config-volume

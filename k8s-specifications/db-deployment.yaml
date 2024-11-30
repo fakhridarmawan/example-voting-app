@@ -22,9 +22,9 @@ metadata:
   labels:
     app: db
 data:
-  POSTGRES_DB: postgres
-  #POSTGRES_PASSWORD: postgresql
-  #POSTGRES_USER: postgresql
+  POSTGRES_DB: demojenkinsack
+  #POSTGRES_PASSWORD: demoadmin
+  #POSTGRES_USER: demoadmin
 
 #secret
 ---
@@ -35,8 +35,8 @@ metadata:
   labels:
     app: db
 data:
-  POSTGRES_USER: cG9zdGdyZXNxbA==
-  POSTGRES_PASSWORD: cG9zdGdyZXNxbA==
+  POSTGRES_USER: ZGVtb2FkbWlu
+  POSTGRES_PASSWORD: ZGVtbzRkbWluIQ==
 
 # db
 
@@ -59,10 +59,10 @@ spec:
     spec:
       containers:
       - name: db
-        image: postgres:9.4.26
+        image: postgres:12
         env:
         - name: PGDATA
-          value: /var/lib/postgresql/data/pgdata
+          value: /var/lib/postgresql/data/demovotingapp
         envFrom:
           - secretRef:
               name: postgres-secret
