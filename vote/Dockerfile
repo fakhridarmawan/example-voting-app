@@ -11,7 +11,7 @@ RUN apt-get update \
 WORKDIR /app
 
 # Install our requirements.txt
-COPY /python/requirements.txt /app/requirements.txt
+COPY vote/python/requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt
 
 # Copy our code from the current folder to /app inside the container
