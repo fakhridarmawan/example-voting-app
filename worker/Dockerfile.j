@@ -7,7 +7,7 @@ RUN ["mvn", "dependency:resolve"]
 RUN ["mvn", "verify"]
 
 # Adding source, compile and package into a fat jar
-COPY ["src/main", "/code/src/main"]
+COPY ["worker/java/src/main", "/code/src/main"]
 RUN ["mvn", "package"]
 
 FROM openjdk:8-jre-alpine

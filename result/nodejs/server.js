@@ -28,7 +28,7 @@ io.sockets.on('connection', function (socket) {
 //});
 
 const pool = new Pool({
-  host: "db",
+  host: "pgm-d9jn8e0imd822jvr.pgsql.ap-southeast-5.rds.aliyuncs.com",
   port: 5432,
   user: process.env.POSTGRES_USER,
   database: process.env.POSTGRES_DB,
@@ -40,14 +40,16 @@ async.retry(
   function(callback) {
     pool.connect(function(err, client, done) {
       if (err) {
-        console.error("Waiting for db");
+        console.log("Waiting for db");
       }
+      console.log("try connect for db");
       callback(err, client);
     });
+    console.log("try for db");
   },
   function(err, client) {
     if (err) {
-      return console.error("Giving up");
+      return console.log("Giving up");
     }
     console.log("Connected to db");
     getVotes(client);
@@ -78,7 +80,10 @@ function collectVotesFromResult(result) {
 }
 
 app.use(cookieParser());
-app.use(bodyParser());
+//app.use(bodyParser());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

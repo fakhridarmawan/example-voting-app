@@ -11,11 +11,11 @@ RUN apt-get update \
 WORKDIR /app
 
 # Install our requirements.txt
-COPY requirements.txt /app/requirements.txt
+COPY /python/requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt
 
 # Copy our code from the current folder to /app inside the container
-COPY . .
+COPY vote/python .
 
 # Make port 80 available for links and/or publish
 EXPOSE 80

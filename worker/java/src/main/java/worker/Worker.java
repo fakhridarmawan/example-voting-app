@@ -9,7 +9,7 @@ class Worker {
   public static void main(String[] args) {
     try {
       Jedis redis = connectToRedis("redis");
-      Connection dbConn = connectToDB("db");
+      Connection dbConn = connectToDB("pgm-d9jn8e0imd822jvr.pgsql.ap-southeast-5.rds.aliyuncs.com");
 
       System.err.println("Watching vote queue");
 
@@ -72,7 +72,7 @@ class Worker {
 
       while (conn == null) {
         try {
-          conn = DriverManager.getConnection(url, "demoadmin", "demoadmin");
+          conn = DriverManager.getConnection(url, "demoadmin", "demo4dmin!");
         } catch (SQLException e) {
           System.err.println("Waiting for db");
           sleep(1000);
