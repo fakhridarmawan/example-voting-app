@@ -25,7 +25,7 @@ RUN npm ci \
 #COPY result/nodejs/ .
 #COPY result/nodejs/views/ views/
 
-ADD nodejs .
+ADD result/nodejs .
 
 ENV PORT 80
 
