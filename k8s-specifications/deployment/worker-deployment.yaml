@@ -21,6 +21,7 @@ spec:
         volumeMounts:
         - name: config-volume
           mountPath: /app/config
+        imagePullPolicy: Always
       volumes:
       - name: config-volume
         configMap:
