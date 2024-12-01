@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-cm
+  labels:
+    app: db
+data:
+  POSTGRES_DB: demojenkinsack
+  #POSTGRES_PASSWORD: demoadmin
+  #POSTGRES_USER: demoadmin

@@ -13,31 +13,6 @@ spec:
       storage: 20Gi
   storageClassName: alicloud-disk-essd
 
-# configmap
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: postgres-cm
-  labels:
-    app: db
-data:
-  POSTGRES_DB: demojenkinsack
-  #POSTGRES_PASSWORD: demoadmin
-  #POSTGRES_USER: demoadmin
-
-#secret
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: postgres-secret
-  labels:
-    app: db
-data:
-  POSTGRES_USER: ZGVtb2FkbWlu
-  POSTGRES_PASSWORD: ZGVtbzRkbWluIQ==
-
 # db
 
 ---
