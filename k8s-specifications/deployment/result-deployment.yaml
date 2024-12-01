@@ -16,7 +16,7 @@ spec:
         app: result
     spec:
       containers:
-      - image: demo-registry-vpc.ap-southeast-5.cr.aliyuncs.com/demovotingapp/result:0.1
+      - image: demo-registry-vpc.ap-southeast-5.cr.aliyuncs.com/demovotingapp/result:latest
         name: result
         ports:
         - containerPort: 80
