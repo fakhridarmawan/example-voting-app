@@ -23,7 +23,8 @@ RUN npm ci \
  && mv /app/node_modules /node_modules
 
 COPY result/nodejs/ .
-COPY result/nodejs/views/ ./views/
+RUN mkdir /app/views
+COPY result/nodejs/views/ /app/views/
 
 ENV PORT 80
 
